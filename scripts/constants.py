@@ -1,6 +1,5 @@
 class Constants:
-    def introduce(self) -> str:
-        return '''
+    INTRODUCTION = '''
             Hi! Thank you for taking the initiative to help people in need.
 
             If you would like to share your food with people near you, then message /share to us.
@@ -11,5 +10,4 @@ class Constants:
             But please keep in mind that we are only a medium and as such we depend on people to share their food through us.
         '''
 
-    def request_location(self) -> str:
-        return 'Please share your location to help us find people near you.'
+    REQUEST_LOCATION = 'Please share your location to help us find people near you.'

@@ -1,10 +1,7 @@
 import azure.functions as func
 import logging
-import os
-from telegram import Update, Bot, KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove
-from telegram.ext import Updater
 
-from shared_code.start import Start
+from scripts.start import Start
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:

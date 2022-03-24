@@ -10,5 +10,5 @@ class Start:
         self.bot: Bot = Bot(self.token)
         self.update: Update = Update.de_json(req.get_json(), self.bot)
 
-    def bot(self, bot: Bot) -> None:
+    def bot(self) -> None:
         pass

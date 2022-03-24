@@ -7,15 +7,14 @@ from validations import Validate
 
 
 class Conversation:
-    def __init__(self, chat_id: int) -> None:
-        self.token = os.getenv('TOKEN')
+    def __init__(self, bot: Bot, chat_id: int) -> None:
+        self.bot = bot
         self.chat_id = chat_id
-        self.bot = Bot(self.token)
 
     def introduce(self):
         Validate.chat_id(self.chat_id)
         self.bot.send_message(chat_id=self.chat_id,
-                              text=Constants.introduce(),
+                              text=Constants.INTRODUCTION,
                               reply_markup=ReplyKeyboardRemove())
 
     def request_location(self):
@@ -28,5 +27,5 @@ class Conversation:
             custom_keyboard, resize_keyboard=True)
 
         self.bot.send_message(chat_id=self.chat_id,
-                              text=Constants.request_location(),
+                              text=Constants.REQUEST_LOCATION,
                               reply_markup=reply_markup)
