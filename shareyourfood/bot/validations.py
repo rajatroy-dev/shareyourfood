@@ -1,4 +1,5 @@
 class Validate:
+    @staticmethod
     def chat_id(chat_id) -> None:
         if not chat_id:
             raise ValueError("chat_id cannot be empty!")

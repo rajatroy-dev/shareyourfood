@@ -1,25 +1,24 @@
-import os
-
 from telegram import Bot, KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove
 
-from constants import Constants
-from validations import Validate
+from shareyourfood.bot.constants import Constants
+from shareyourfood.bot.validations import Validate
 
 
 class Conversation:
     def __init__(self, bot: Bot, chat_id: int) -> None:
         self.bot = bot
         self.chat_id = chat_id
+        Validate.chat_id(self.chat_id)
 
     def introduce(self):
-        Validate.chat_id(self.chat_id)
         self.bot.send_message(chat_id=self.chat_id,
                               text=Constants.INTRODUCTION,
                               reply_markup=ReplyKeyboardRemove())
 
-    def request_location(self):
-        Validate.chat_id(self.chat_id)
+    def request_start(self):
+        pass
 
+    def request_location(self):
         location_keyboard = KeyboardButton(
             text="Share location", request_location=True)
         custom_keyboard = [[location_keyboard]]
@@ -29,3 +28,6 @@ class Conversation:
         self.bot.send_message(chat_id=self.chat_id,
                               text=Constants.REQUEST_LOCATION,
                               reply_markup=reply_markup)
+
+    def request_find_people_near_you(self):
+        pass
