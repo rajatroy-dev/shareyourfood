@@ -1,5 +1,5 @@
 class Constants:
-    INTRODUCTION = '''Hi! Thank you for taking the initiative to help people in need.
+    INTRODUCTION = '''Thank you for taking the initiative to help people in need.
 
 Use /share if you would like to share your food with people.
 Use /request if you would like to request for food from people.

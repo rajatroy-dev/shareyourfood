@@ -1,4 +1,4 @@
-from telegram import Bot, KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove
+from telegram import Bot, KeyboardButton, ParseMode, ReplyKeyboardMarkup, ReplyKeyboardRemove
 
 from shareyourfood.bot.constants import Constants
 from shareyourfood.bot.validations import Validate
@@ -10,10 +10,11 @@ class Conversation:
         self.chat_id = chat_id
         Validate.chat_id(self.chat_id)
 
-    def introduce(self):
+    def introduce(self, full_name):
         self.bot.send_message(chat_id=self.chat_id,
-                              text=Constants.INTRODUCTION,
-                              reply_markup=ReplyKeyboardRemove())
+                              text=f'Hi! <b>{full_name}</b> &#128075;, {Constants.INTRODUCTION}',
+                              reply_markup=ReplyKeyboardRemove(),
+                              parse_mode=ParseMode.HTML)
 
     def request_start(self):
         pass
