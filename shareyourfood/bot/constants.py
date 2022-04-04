@@ -25,3 +25,7 @@ But please keep in mind that we are only a medium and as such we depend on peopl
 We will share your username if we find someone in need so that they can contact you.'''
 
     NO_SHARE = 'We couldn\'t find anyone sharing food near you.'
+
+    FOUND_SHARE_PREFIX = 'Hooray!  &#127881; We have found the following users who are sharing food right now.'
+
+    FOUND_SHARE_SUFFIX = ' Please tap on their username and start a conversation with them directly.'
