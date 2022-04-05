@@ -1,4 +1,3 @@
-from cgitb import text
 import os
 from telegram import Bot, KeyboardButton, ParseMode, ReplyKeyboardMarkup, ReplyKeyboardRemove
 

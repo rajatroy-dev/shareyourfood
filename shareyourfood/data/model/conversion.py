@@ -1,6 +1,11 @@
-from typing import Any, TypeVar, Type, cast
+from typing import Any, Callable, List, TypeVar, Type, cast
 
 T = TypeVar("T")
+
+
+def from_list(f: Callable[[Any], T], x: Any) -> List[T]:
+    assert isinstance(x, list)
+    return [f(y) for y in x]
 
 
 def from_float(x: Any) -> float:
