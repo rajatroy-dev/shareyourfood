@@ -1,6 +1,5 @@
 from shareyourfood.bot.constants import Constants
 from shareyourfood.bot.conversation import Conversation
-from shareyourfood.data.model.location import Location
 from shareyourfood.data.repository import Repository
 
 
@@ -32,19 +31,17 @@ class Handle:
 
         if entry_search_result \
                 and entry_search_result.message_type == Constants.SHARE:
-            location: Location = Location(latitude=latitude,
-                                          longitude=longitude)
             self.repository.save_share_food_details(chat_id=chat_id,
                                                     username=username,
                                                     message_id=message_id - 2,
-                                                    location=location)
+                                                    latitude=latitude,
+                                                    longitude=longitude)
             self.conversation.reply_shared_details_saved(chat_id)
 
         elif entry_search_result \
                 and entry_search_result.message_type == Constants.REQUEST:
-            location: Location = Location(latitude=latitude,
-                                          longitude=longitude)
-            food_search_result = self.repository.find_food(location)
+            food_search_result = self.repository.find_food(latitude=latitude,
+                                                           longitude=longitude)
             if not food_search_result:
                 self.conversation.no_share_found(chat_id)
             else:

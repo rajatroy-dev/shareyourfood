@@ -4,7 +4,7 @@
 #
 # and then, to convert JSON from a string, do
 #
-#     result = share_from_dict(json.loads(json_string))
+#     result = entry_from_dict(json.loads(json_string))
 
 from dataclasses import dataclass
 from typing import Any
@@ -47,9 +47,9 @@ class Entry:
         return result
 
 
-def share_from_dict(s: Any) -> Entry:
+def entry_from_dict(s: Any) -> Entry:
     return Entry.from_dict(s)
 
 
-def share_to_dict(x: Entry) -> Any:
+def entry_to_dict(x: Entry) -> Any:
     return to_class(Entry, x)

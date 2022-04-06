@@ -6,12 +6,9 @@
 #
 #     result = location_from_dict(json.loads(json_string))
 
-from typing import List, Any, TypeVar
+from typing import List, Any
 
 from shareyourfood.data.model.conversion import from_float, from_list, from_str, to_class, to_float
-
-
-T = TypeVar("T")
 
 
 class Location:

@@ -1,16 +1,39 @@
 from shareyourfood.bot.constants import Constants
+from shareyourfood.data.dao.cosmos_db.cosmos import Cosmos as Dao
+from shareyourfood.data.model.entry import Entry
 from shareyourfood.data.model.location import Location
 
 
 class Repository:
-    def save_share_food_details(self, chat_id: int, username: str, message_id: int, location: Location = None, type: str = Constants.SHARE):
-        pass
+    def __init__(self) -> None:
+        self.dao = Dao()
+
+    def save_share_food_details(self, chat_id: int, username: str, message_id: int, latitude: float = 0.0, longitude: float = 0.0, type: str = Constants.SHARE):
+        location: Location = Location(type='Point',
+                                      coordinates=[latitude, longitude])
+        entry: Entry = Entry(id='',
+                             message_type=type,
+                             entry_id='',
+                             chat_id=chat_id,
+                             username=username,
+                             message_id=message_id,
+                             location=location)
+        self.dao.save_entry(entry)
 
     def find_entry(self, chat_id: int, username: str, message_id: int):
-        pass
+        self.dao.find_entry(chat_id=chat_id,
+                            username=username,
+                            message_id=message_id)
 
     def save_request_food_details(self, chat_id: int, username: str, message_id: int, type: str = Constants.REQUEST):
-        pass
+        entry: Entry = Entry(id='',
+                             message_type=type,
+                             entry_id='',
+                             chat_id=chat_id,
+                             username=username,
+                             message_id=message_id,
+                             location=None)
+        self.dao.save_entry(entry)
 
-    def find_food(self, location: Location):
-        pass
+    def find_food(self, latitude: float, longitude: float):
+        self.dao.find_food(latitude=latitude, longitude=longitude)
