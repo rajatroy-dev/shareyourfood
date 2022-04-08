@@ -1,7 +1,7 @@
 from shareyourfood.bot.constants import Constants
 from shareyourfood.data.dao.cosmos_db.cosmos import Cosmos as Dao
 from shareyourfood.data.model.entry import Entry
-from shareyourfood.data.model.location import Location
+from shareyourfood.data.model.location import PointLocation
 
 
 class Repository:
@@ -9,8 +9,7 @@ class Repository:
         self.dao = Dao()
 
     def save_share_food_details(self, chat_id: int, username: str, message_id: int, latitude: float = 0.0, longitude: float = 0.0, type: str = Constants.SHARE):
-        location: Location = Location(type='Point',
-                                      coordinates=[latitude, longitude])
+        location: PointLocation = PointLocation([latitude, longitude])
         entry: Entry = Entry(id='',
                              message_type=type,
                              entry_id='',

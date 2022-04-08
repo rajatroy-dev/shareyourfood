@@ -1,13 +1,12 @@
 import json
 import os
-from shareyourfood.data.model.location import Location
+from shareyourfood.data.model.location import PointLocation
 
 
 class CosmosQuery:
     def find_nearby_food(latitude: int, longitude: int) -> str:
         distance_in_metres: int = os.getenv('SEARCH_RADIUS')
-        location: Location = Location(type='Point',
-                                      coordinates=[latitude, longitude])
+        location: PointLocation = PointLocation([latitude, longitude])
         dict_location: dict = location.to_dict()
         str_location: str = json.dumps(dict_location)
 

@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from shareyourfood.data.model.conversion import from_int, from_str, to_class
-from shareyourfood.data.model.location import Location
+from shareyourfood.data.model.location import PointLocation
 
 
 @dataclass
@@ -21,7 +21,7 @@ class Entry:
     chat_id: int
     username: str
     message_id: int
-    location: Location
+    location: PointLocation
 
     @staticmethod
     def from_dict(obj: Any) -> 'Entry':
@@ -32,7 +32,7 @@ class Entry:
         chat_id = from_int(obj.get("chat_id"))
         username = from_str(obj.get("username"))
         message_id = from_int(obj.get("message_id"))
-        location = Location.from_dict(obj.get("location"))
+        location = PointLocation.from_dict(obj.get("location"))
         return Entry(id, message_type, entry_id, chat_id, username, message_id, location)
 
     def to_dict(self) -> dict:
@@ -43,7 +43,7 @@ class Entry:
         result["chat_id"] = from_int(self.chat_id)
         result["username"] = from_str(self.username)
         result["message_id"] = from_int(self.message_id)
-        result["location"] = to_class(Location, self.location)
+        result["location"] = to_class(PointLocation, self.location)
         return result
 
 

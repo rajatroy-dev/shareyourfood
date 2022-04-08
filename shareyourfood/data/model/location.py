@@ -8,34 +8,33 @@
 
 from typing import List, Any
 
-from shareyourfood.data.model.conversion import from_float, from_list, from_str, to_class, to_float
+from shareyourfood.data.model.conversion import from_float, from_list, to_class, to_float
 
 
-class Location:
+class PointLocation:
     type: str
     coordinates: List[float]
 
-    def __init__(self, type: str, coordinates: List[float]) -> None:
-        self.type = type
+    def __init__(self, coordinates: List[float]) -> None:
+        self.type = 'Point'
         self.coordinates = coordinates
 
     @staticmethod
-    def from_dict(obj: Any) -> 'Location':
+    def from_dict(obj: Any) -> 'PointLocation':
         assert isinstance(obj, dict)
-        type = from_str(obj.get("type"))
         coordinates = from_list(from_float, obj.get("coordinates"))
-        return Location(type, coordinates)
+        return PointLocation(coordinates)
 
     def to_dict(self) -> dict:
         result: dict = {}
-        result["type"] = from_str(self.type)
+        result["type"] = 'Point'
         result["coordinates"] = from_list(to_float, self.coordinates)
         return result
 
 
-def location_from_dict(s: Any) -> Location:
-    return Location.from_dict(s)
+def location_from_dict(s: Any) -> PointLocation:
+    return PointLocation.from_dict(s)
 
 
-def location_to_dict(x: Location) -> Any:
-    return to_class(Location, x)
+def location_to_dict(x: PointLocation) -> Any:
+    return to_class(PointLocation, x)
