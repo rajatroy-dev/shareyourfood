@@ -12,9 +12,9 @@ We will try our best to connect you to people near you.
 
 But please keep in mind that we are only a medium and as such we depend on people to share their food through us.'''
 
-    SHARE_LOCATION = 'Please share your location so that people near you can find request for food.'
+    SHARE_LOCATION = 'Please share your location so that people near you can request for food.'
 
-    REQUEST_LOCATION = 'Please provide your location so that we can find if anyone is sharing food near you.'
+    REQUEST_LOCATION = 'Please provide your location so that we can find if anyone near you is sharing food.'
 
     UNKOWN_LOCATION = 'We couldn\'t associate your location share with a /share or a /request.'
 
@@ -29,3 +29,5 @@ We will share your username if we find someone in need so that they can contact 
     FOUND_SHARE_PREFIX = 'Hooray!  &#127881; We have found the following users who are sharing food right now.'
 
     FOUND_SHARE_SUFFIX = ' Please tap on their username and start a conversation with them directly.'
+
+    SERVER_ERROR = 'Something went wrong! Please try again later.'

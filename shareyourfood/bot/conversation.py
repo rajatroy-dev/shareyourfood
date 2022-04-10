@@ -1,4 +1,5 @@
 import os
+from typing import Any, Iterable
 from telegram import Bot, KeyboardButton, ParseMode, ReplyKeyboardMarkup, ReplyKeyboardRemove
 
 from shareyourfood.bot.constants import Constants
@@ -40,7 +41,7 @@ class Conversation:
 
     def unknown_location(self, chat_id: int) -> None:
         self.bot.send_message(chat_id=chat_id,
-                              text=f'Sorry! &#57608;. {Constants.UNKOWN_LOCATION}',
+                              text=f'Sorry! &#57608; {Constants.UNKOWN_LOCATION}',
                               reply_markup=ReplyKeyboardRemove(),
                               parse_mode=ParseMode.HTML)
 
@@ -52,19 +53,25 @@ class Conversation:
 
     def no_share_found(self, chat_id: int) -> None:
         self.bot.send_message(chat_id=chat_id,
-                              text=f'Sorry! &#57608;. {Constants.NO_SHARE}',
+                              text=f'Sorry! &#57608; {Constants.NO_SHARE}',
                               reply_markup=ReplyKeyboardRemove(),
                               parse_mode=ParseMode.HTML)
 
-    def reply_nearby_shares(self, chat_id: int, shares) -> None:
+    def reply_nearby_shares(self, chat_id: int, shares: Iterable[dict[str, Any]]) -> None:
         message: str = f'${Constants.FOUND_SHARE_PREFIX} \n'
 
         for share in shares:
-            message += f'@${share.username} \n'
+            message += f'@${share["username"]} \n'
 
         message += Constants.FOUND_SHARE_SUFFIX
 
         self.bot.send_message(chat_id=chat_id,
                               text=message,
+                              reply_markup=ReplyKeyboardRemove(),
+                              parse_mode=ParseMode.HTML)
+
+    def reply_server_error(self, chat_id: int) -> None:
+        self.bot.send_message(chat_id=chat_id,
+                              text=f'Sorry! &#57608; {Constants.SERVER_ERROR}',
                               reply_markup=ReplyKeyboardRemove(),
                               parse_mode=ParseMode.HTML)

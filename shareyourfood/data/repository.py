@@ -1,3 +1,4 @@
+from typing import Any, Iterable
 from shareyourfood.bot.constants import Constants
 from shareyourfood.data.dao.cosmos_db.cosmos import Cosmos as Dao
 from shareyourfood.data.model.entry import Entry
@@ -8,7 +9,7 @@ class Repository:
     def __init__(self) -> None:
         self.dao = Dao()
 
-    def save_share_food_details(self, chat_id: int, username: str, message_id: int, latitude: float = 0.0, longitude: float = 0.0, type: str = Constants.SHARE):
+    def save_share_food_details(self, chat_id: int, username: str, message_id: int, latitude: float = 0.0, longitude: float = 0.0, type: str = Constants.SHARE) -> bool:
         location: PointLocation = PointLocation([latitude, longitude])
         entry: Entry = Entry(id='',
                              message_type=type,
@@ -17,14 +18,10 @@ class Repository:
                              username=username,
                              message_id=message_id,
                              location=location)
-        self.dao.save_entry(entry)
+        response: bool = self.dao.save_entry(entry)
+        return response
 
-    def find_entry(self, chat_id: int, username: str, message_id: int):
-        self.dao.find_entry(chat_id=chat_id,
-                            username=username,
-                            message_id=message_id)
-
-    def save_request_food_details(self, chat_id: int, username: str, message_id: int, type: str = Constants.REQUEST):
+    def save_request_food_details(self, chat_id: int, username: str, message_id: int, type: str = Constants.REQUEST) -> bool:
         entry: Entry = Entry(id='',
                              message_type=type,
                              entry_id='',
@@ -32,7 +29,16 @@ class Repository:
                              username=username,
                              message_id=message_id,
                              location=None)
-        self.dao.save_entry(entry)
+        response: bool = self.dao.save_entry(entry)
+        return response
 
-    def find_food(self, latitude: float, longitude: float):
-        self.dao.find_food(latitude=latitude, longitude=longitude)
+    def find_entry(self, chat_id: int, username: str, message_id: int) -> dict[str, Any]:
+        response: dict[str, Any] = self.dao.find_entry(chat_id=chat_id,
+                                                       username=username,
+                                                       message_id=message_id)
+        return response
+
+    def find_food(self, latitude: float, longitude: float) -> Iterable[dict[str, Any]]:
+        response: Iterable[dict[str, Any]] = self.dao.find_food(
+            latitude=latitude, longitude=longitude)
+        return response

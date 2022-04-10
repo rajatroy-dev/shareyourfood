@@ -4,7 +4,7 @@ import re
 import azure.functions as func
 from telegram import Bot, Update
 
-from shareyourfood.bot.handlers import Handle
+from shareyourfood.bot.handler import Handle
 
 
 class Start:

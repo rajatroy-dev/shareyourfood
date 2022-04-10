@@ -1,4 +1,5 @@
 import os
+from typing import Any, Iterable
 import uuid
 from azure.cosmos import CosmosClient, PartitionKey, exceptions
 from shareyourfood.data.dao.cosmos_db.query import CosmosQuery
@@ -29,19 +30,35 @@ class Cosmos:
         except exceptions.CosmosHttpResponseError:
             raise
 
-    def save_entry(self, entry: Entry) -> None:
+    def save_entry(self, entry: Entry) -> bool:
         entry.id = str(uuid.uuid5(uuid.NAMESPACE_DNS, self.url))
-        self.container.upsert_item(entry.to_dict())
+        entry.message_id = entry.id
+        response: dict[str, Any] = self.container.upsert_item(entry.to_dict())
 
-    def find_food(self, latitude: float, longitude: float) -> None:
-        query: str = CosmosQuery.find_nearby_food(latitude=latitude,
-                                                  longitude=longitude)
-        self.container.query_items(query=query,
-                                   enable_cross_partition_query=True)
+        if response \
+                and response['id'] is not None:
+            return True
+        return False
 
-    def find_entry(self, chat_id: int, username: str, message_id: int):
+    def find_entry(self, chat_id: int, username: str, message_id: int) -> dict[str, Any]:
         query: str = CosmosQuery.find_nearby_entry(chat_id=chat_id,
                                                    username=username,
                                                    message_id=message_id)
-        self.container.query_items(query=query,
-                                   enable_cross_partition_query=True)
+        response: Iterable[dict[str, Any]] = self.container.query_items(query=query,
+                                                                        enable_cross_partition_query=True)
+
+        if len(response) == 0:
+            return None
+        elif len(response) > 1:
+            return None
+        return response[0]
+
+    def find_food(self, latitude: float, longitude: float) -> Iterable[dict[str, Any]]:
+        query: str = CosmosQuery.find_nearby_food(latitude=latitude,
+                                                  longitude=longitude)
+        response: Iterable[dict[str, Any]] = self.container.query_items(query=query,
+                                                                        enable_cross_partition_query=True)
+
+        if len(response) == 0:
+            return None
+        return response
