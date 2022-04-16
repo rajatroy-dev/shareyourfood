@@ -22,18 +22,18 @@ class Start:
 
     def chat(self) -> None:
         if self.update.effective_message.text \
-                and re.search('^/start$', self.update.message.text):
+                and re.search('^/start$', self.update.effective_message.text):
             self.handle.introduction(chat_id=self.chat_id,
                                      full_name=self.full_name)
 
         elif self.update.effective_message.text \
-                and re.search('^/share$', self.update.message.text):
+                and re.search('^/share$', self.update.effective_message.text):
             self.handle.share(chat_id=self.chat_id,
                               username=self.username,
                               message_id=self.message_id)
 
         elif self.update.effective_message.text \
-                and re.search('^/request$', self.update.message.text):
+                and re.search('^/request$', self.update.effective_message.text):
             self.handle.request(chat_id=self.chat_id,
                                 username=self.username,
                                 message_id=self.message_id)
