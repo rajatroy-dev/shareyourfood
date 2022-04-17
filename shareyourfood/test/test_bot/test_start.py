@@ -80,6 +80,7 @@ class Test_Start(unittest.TestCase):
         assert instance.introduction.call_count == 1
         assert instance.share.call_count == 0
         assert instance.request.call_count == 0
+        assert instance.location.call_count == 0
         instance.introduction.assert_called_once_with(
             cls.chat_id, cls.full_name)
 
@@ -109,6 +110,7 @@ class Test_Start(unittest.TestCase):
         assert instance.introduction.call_count == 0
         assert instance.share.call_count == 1
         assert instance.request.call_count == 0
+        assert instance.location.call_count == 0
         instance.share.assert_called_once_with(
             cls.chat_id, cls.username, cls.message_id)
 
@@ -138,6 +140,7 @@ class Test_Start(unittest.TestCase):
         assert instance.introduction.call_count == 0
         assert instance.share.call_count == 0
         assert instance.request.call_count == 1
+        assert instance.location.call_count == 0
         instance.request.assert_called_once_with(
             cls.chat_id, cls.username, cls.message_id)
 
@@ -202,6 +205,7 @@ class Test_Start(unittest.TestCase):
         assert instance.introduction.call_count == 1
         assert instance.share.call_count == 0
         assert instance.request.call_count == 0
+        assert instance.location.call_count == 0
         instance.introduction.assert_called_once_with(
             cls.chat_id, cls.full_name)
 
