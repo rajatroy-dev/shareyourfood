@@ -1,8 +1,6 @@
 from typing import Any, Iterable
 import unittest
 from unittest.mock import patch
-from shareyourfood.data.model.entry import Entry
-from shareyourfood.data.model.location import PointLocation
 
 from shareyourfood.data.repository import Repository
 
@@ -96,6 +94,8 @@ class Test_Repository(unittest.TestCase):
         assert Dao.call_count == 1
         assert Dao_instance.find_entry.call_count == 1
         assert response == cls.shares
+        Dao_instance.find_entry\
+            .assert_called_once_with(cls.chat_id, cls.username, cls.message_id)
 
     @patch('shareyourfood.data.repository.Dao', autospec=True)
     def test_find_food(cls, Dao):
@@ -107,3 +107,5 @@ class Test_Repository(unittest.TestCase):
         assert Dao.call_count == 1
         assert Dao_instance.find_food.call_count == 1
         assert response == cls.shares
+        Dao_instance.find_food\
+            .assert_called_once_with(cls.latitude, cls.longitude)

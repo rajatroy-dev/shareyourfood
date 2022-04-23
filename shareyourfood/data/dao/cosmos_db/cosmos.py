@@ -32,11 +32,11 @@ class Cosmos:
 
     def save_entry(self, entry: Entry) -> bool:
         entry.id = str(uuid.uuid5(uuid.NAMESPACE_DNS, self.url))
-        entry.message_id = entry.id
+        entry.entry_id = entry.id
         response: dict[str, Any] = self.container.upsert_item(entry.to_dict())
 
         if response \
-                and response['id'] is not None:
+                and response.get('id') is not None:
             return True
         return False
 
@@ -47,7 +47,9 @@ class Cosmos:
         response: Iterable[dict[str, Any]] = self.container.query_items(query=query,
                                                                         enable_cross_partition_query=True)
 
-        if len(response) == 0:
+        if not response:
+            return None
+        elif len(response) == 0:
             return None
         elif len(response) > 1:
             return None
@@ -59,6 +61,8 @@ class Cosmos:
         response: Iterable[dict[str, Any]] = self.container.query_items(query=query,
                                                                         enable_cross_partition_query=True)
 
-        if len(response) == 0:
+        if not response:
             return None
-        return response
+        elif len(response) == 0:
+            return None
+        return response[0]
