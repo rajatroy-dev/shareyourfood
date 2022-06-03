@@ -6,7 +6,7 @@
 #
 #     result = location_from_dict(json.loads(json_string))
 
-from typing import List, Any
+from typing import Dict, List, Any
 
 from shareyourfood.data.model.conversion import from_float, from_list, to_class, to_float
 
@@ -21,12 +21,12 @@ class PointLocation:
 
     @staticmethod
     def from_dict(obj: Any) -> 'PointLocation':
-        assert isinstance(obj, dict)
+        assert isinstance(obj, Dict)
         coordinates = from_list(from_float, obj.get("coordinates"))
         return PointLocation(coordinates)
 
-    def to_dict(self) -> dict:
-        result: dict = {}
+    def to_dict(self) -> Dict:
+        result: Dict = {}
         result["type"] = 'Point'
         result["coordinates"] = from_list(to_float, self.coordinates)
         return result

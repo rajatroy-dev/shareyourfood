@@ -1,4 +1,4 @@
-from typing import Any, Iterable
+from typing import Any, Dict, Iterable
 import unittest
 from unittest.mock import patch
 
@@ -12,7 +12,7 @@ class Test_Repository(unittest.TestCase):
     username: str
     latitude: str
     longitude: str
-    shares: Iterable[dict[str, Any]]
+    shares: Iterable[Dict[str, Any]]
 
     @classmethod
     def setUpClass(cls) -> None:

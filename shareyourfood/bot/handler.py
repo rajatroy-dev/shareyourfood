@@ -1,4 +1,4 @@
-from typing import Any, Iterable
+from typing import Any, Dict, Iterable
 from shareyourfood.bot.constants import Constants
 from shareyourfood.bot.conversation import Conversation
 from shareyourfood.data.repository import Repository
@@ -32,7 +32,7 @@ class Handle:
             self.conversation.reply_server_error(chat_id)
 
     def location(self, chat_id: int, username: str, message_id: int, latitude: float, longitude: float) -> None:
-        entry_search_result: dict[str, Any] = self.repository.find_entry(chat_id=chat_id,
+        entry_search_result: Dict[str, Any] = self.repository.find_entry(chat_id=chat_id,
                                                                          username=username,
                                                                          message_id=message_id - 2)
 
@@ -50,7 +50,7 @@ class Handle:
 
         elif entry_search_result \
                 and entry_search_result['message_type'] == Constants.REQUEST:
-            food_search_result: Iterable[dict[str, Any]] = self.repository.find_food(latitude=latitude,
+            food_search_result: Iterable[Dict[str, Any]] = self.repository.find_food(latitude=latitude,
                                                                                      longitude=longitude)
             if food_search_result:
                 self.conversation.reply_nearby_shares(chat_id=chat_id,

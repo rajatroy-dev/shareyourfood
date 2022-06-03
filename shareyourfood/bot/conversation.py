@@ -1,5 +1,5 @@
 import os
-from typing import Any, Iterable
+from typing import Any, Dict, Iterable, List
 from telegram import Bot, KeyboardButton, ParseMode, ReplyKeyboardMarkup, ReplyKeyboardRemove
 
 from shareyourfood.bot.constants import Constants
@@ -19,7 +19,7 @@ class Conversation:
     def ask_location_for_share(self, chat_id: int) -> None:
         location_keyboard: KeyboardButton = KeyboardButton(
             text='Share location', request_location=True)
-        custom_keyboard: list[list[KeyboardButton]] = [[location_keyboard]]
+        custom_keyboard: List[List[KeyboardButton]] = [[location_keyboard]]
         reply_markup: ReplyKeyboardMarkup = ReplyKeyboardMarkup(
             custom_keyboard, resize_keyboard=True)
 
@@ -31,7 +31,7 @@ class Conversation:
     def ask_location_for_request(self, chat_id: int) -> None:
         location_keyboard: KeyboardButton = KeyboardButton(
             text='Share location', request_location=True)
-        custom_keyboard: list[list[KeyboardButton]] = [[location_keyboard]]
+        custom_keyboard: List[List[KeyboardButton]] = [[location_keyboard]]
         reply_markup: ReplyKeyboardMarkup = ReplyKeyboardMarkup(
             custom_keyboard, resize_keyboard=True)
 
@@ -41,13 +41,13 @@ class Conversation:
 
     def unknown_location(self, chat_id: int) -> None:
         self.bot.send_message(chat_id=chat_id,
-                              text=f'Sorry! &#57608; {Constants.UNKOWN_LOCATION}',
+                              text=f'Sorry! &#128531; {Constants.UNKOWN_LOCATION}',
                               reply_markup=ReplyKeyboardRemove(),
                               parse_mode=ParseMode.HTML)
 
     def reply_shared_details_saved(self, chat_id: int) -> None:
         self.bot.send_message(chat_id=chat_id,
-                              text=f'Thank You! &#58397; for your benevolence. {Constants.LOCATION_SAVED}',
+                              text=f'Thank You! &#128525; for your benevolence. {Constants.LOCATION_SAVED}',
                               reply_markup=ReplyKeyboardRemove(),
                               parse_mode=ParseMode.HTML)
 
@@ -57,13 +57,13 @@ class Conversation:
                               reply_markup=ReplyKeyboardRemove(),
                               parse_mode=ParseMode.HTML)
 
-    def reply_nearby_shares(self, chat_id: int, shares: Iterable[dict[str, Any]]) -> None:
-        message: str = f'${Constants.FOUND_SHARE_PREFIX} \n'
+    def reply_nearby_shares(self, chat_id: int, shares: Iterable[Dict[str, Any]]) -> None:
+        message: str = f'{Constants.FOUND_SHARE_PREFIX}\n\n'
 
         for share in shares:
-            message += f'@${share["username"]} \n'
+            message += f'@{share["username"]}\n'
 
-        message += Constants.FOUND_SHARE_SUFFIX
+        message += f'\n{Constants.FOUND_SHARE_SUFFIX}'
 
         self.bot.send_message(chat_id=chat_id,
                               text=message,

@@ -7,7 +7,7 @@
 #     result = entry_from_dict(json.loads(json_string))
 
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, Dict
 
 from shareyourfood.data.model.conversion import from_int, from_str, to_class
 from shareyourfood.data.model.location import PointLocation
@@ -25,8 +25,8 @@ class Entry:
 
     @staticmethod
     def from_dict(obj: Any) -> 'Entry':
-        assert isinstance(obj, dict)
-        id = from_str(obj.get("_id"))
+        assert isinstance(obj, Dict)
+        id = from_str(obj.get("id"))
         message_type = from_str(obj.get("message_type"))
         entry_id = from_str(obj.get("entry_id"))
         chat_id = from_int(obj.get("chat_id"))
@@ -35,15 +35,15 @@ class Entry:
         location = PointLocation.from_dict(obj.get("location"))
         return Entry(id, message_type, entry_id, chat_id, username, message_id, location)
 
-    def to_dict(self) -> dict:
-        result: dict = {}
-        result["_id"] = from_str(self.id)
+    def to_dict(self) -> Dict:
+        result: Dict = {}
+        result["id"] = from_str(self.id)
         result["message_type"] = from_str(self.message_type)
         result["entry_id"] = from_str(self.entry_id)
         result["chat_id"] = from_int(self.chat_id)
         result["username"] = from_str(self.username)
         result["message_id"] = from_int(self.message_id)
-        result["location"] = to_class(PointLocation, self.location)
+        result["location"] = to_class(PointLocation, self.location) if self.location else ''
         return result
 
 

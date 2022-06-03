@@ -281,4 +281,4 @@ class Test_Cosmos(unittest.TestCase):
         assert CosmosClient_instance.create_database.call_count == 1
         assert create_database_instance.create_container.call_count == 1
         assert create_container_instance.query_items.call_count == 1
-        assert response.get('id') == 'id'
+        assert response[0].get('id') == 'id'

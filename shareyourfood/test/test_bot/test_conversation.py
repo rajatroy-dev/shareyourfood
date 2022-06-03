@@ -1,4 +1,4 @@
-from typing import Any, Iterable
+from typing import Any, Dict, Iterable
 import unittest
 from unittest.mock import patch
 from telegram import KeyboardButton, ParseMode, ReplyKeyboardMarkup, ReplyKeyboardRemove
@@ -11,7 +11,7 @@ class Test_Conversation(unittest.TestCase):
     token: str
     chat_id: int
     full_name: str
-    shares: Iterable[dict[str, Any]]
+    shares: Iterable[Dict[str, Any]]
 
     @classmethod
     def setUpClass(cls) -> None:
@@ -110,7 +110,7 @@ class Test_Conversation(unittest.TestCase):
         assert instance.send_message.call_count == 1
         instance.send_message.assert_called_once_with(
             chat_id=cls.chat_id,
-            text=f'Sorry! &#57608; {Constants.UNKOWN_LOCATION}',
+            text=f'Sorry! &#128531; {Constants.UNKOWN_LOCATION}',
             reply_markup=ReplyKeyboardRemove(),
             parse_mode=ParseMode.HTML
         )
@@ -128,7 +128,7 @@ class Test_Conversation(unittest.TestCase):
         assert instance.send_message.call_count == 1
         instance.send_message.assert_called_once_with(
             chat_id=cls.chat_id,
-            text=f'Thank You! &#58397; for your benevolence. {Constants.LOCATION_SAVED}',
+            text=f'Thank You! &#128525; for your benevolence. {Constants.LOCATION_SAVED}',
             reply_markup=ReplyKeyboardRemove(),
             parse_mode=ParseMode.HTML
         )
@@ -159,10 +159,10 @@ class Test_Conversation(unittest.TestCase):
         os_getenv.assert_called_once_with('TOKEN')
         Bot.assert_called_once_with(cls.token)
         instance = Bot.return_value
-        message: str = f'${Constants.FOUND_SHARE_PREFIX} \n'
+        message: str = f'{Constants.FOUND_SHARE_PREFIX}\n\n'
         for share in cls.shares:
-            message += f'@${share["username"]} \n'
-        message += Constants.FOUND_SHARE_SUFFIX
+            message += f'@{share["username"]}\n'
+        message += f'\n{Constants.FOUND_SHARE_SUFFIX}'
         conversation.reply_nearby_shares(cls.chat_id, cls.shares)
 
         assert instance.send_message.call_count == 1

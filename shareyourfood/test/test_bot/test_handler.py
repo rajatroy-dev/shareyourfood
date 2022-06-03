@@ -1,4 +1,4 @@
-from typing import Any, Iterable
+from typing import Any, Dict, Iterable
 import unittest
 from unittest.mock import patch
 from shareyourfood.bot.constants import Constants
@@ -13,7 +13,7 @@ class Test_Handler(unittest.TestCase):
     username: str
     latitude: str
     longitude: str
-    shares: Iterable[dict[str, Any]]
+    shares: Iterable[Dict[str, Any]]
 
     @classmethod
     def setUpClass(cls) -> None:

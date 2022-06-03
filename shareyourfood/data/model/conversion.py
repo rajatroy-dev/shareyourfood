@@ -1,4 +1,4 @@
-from typing import Any, Callable, List, TypeVar, Type, cast
+from typing import Any, Callable, Dict, List, TypeVar, Type, cast
 
 T = TypeVar("T")
 
@@ -28,6 +28,6 @@ def from_int(x: Any) -> int:
     return x
 
 
-def to_class(c: Type[T], x: Any) -> dict:
+def to_class(c: Type[T], x: Any) -> Dict:
     assert isinstance(x, c)
     return cast(Any, x).to_dict()
