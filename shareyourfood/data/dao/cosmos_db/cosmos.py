@@ -31,7 +31,7 @@ class Cosmos:
             raise
 
     def save_entry(self, entry: Entry) -> bool:
-        entry.id = str(uuid.uuid5(uuid.NAMESPACE_URL, self.url_for_uuid))
+        entry.id = str(uuid.uuid5(uuid.NAMESPACE_URL, f'{self.url_for_uuid}/{entry.chat_id}/{entry.message_id}'))
         entry.entry_id = entry.id
         response: Dict[str, Any] = self.container.upsert_item(entry.to_dict())
 
