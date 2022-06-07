@@ -3,14 +3,16 @@ class Constants:
 
     REQUEST = 'request'
 
-    INTRODUCTION = '''Thank you for taking the initiative to help people in need.
-
-Use /share if you would like to share your food with people.
+    COMMON = '''Use /share if you would like to share your food with people.
 Use /request if you would like to request for food from people.
 
 We will try our best to connect you to people near you.
 
 But please keep in mind that we are only a medium and as such we depend on people to share their food through us.'''
+
+    INTRODUCTION = f'''Thank you for taking the initiative to help people in need.
+
+{COMMON}'''
 
     SHARE_LOCATION = 'Please share your location so that people near you can request for food.'
 
@@ -35,3 +37,7 @@ We will share your username with someone in need so that they can contact you.''
     FOUND_SHARE_SUFFIX = ' Please tap on their username and start a conversation with them directly.'
 
     SERVER_ERROR = 'Something went wrong! Please try again later.'
+
+    COULD_NOT_UNDERSTAND = f'''Sorry! &#129322; I didn't understand what you said.
+    
+{COMMON}'''

@@ -48,5 +48,4 @@ class Start:
                                  longitude=self.update.effective_message.location.longitude)
 
         else:
-            self.handle.introduction(chat_id=self.chat_id,
-                                     full_name=self.full_name)
+            self.handle.unknown_message(chat_id=self.chat_id)

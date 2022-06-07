@@ -146,7 +146,7 @@ class Test_Conversation(unittest.TestCase):
         assert instance.send_message.call_count == 1
         instance.send_message.assert_called_once_with(
             chat_id=cls.chat_id,
-            text=f'Sorry! &#57608; {Constants.NO_SHARE}',
+            text=f'Sorry! &#128531; {Constants.NO_SHARE}',
             reply_markup=ReplyKeyboardRemove(),
             parse_mode=ParseMode.HTML
         )
@@ -186,7 +186,7 @@ class Test_Conversation(unittest.TestCase):
         assert instance.send_message.call_count == 1
         instance.send_message.assert_called_once_with(
             chat_id=cls.chat_id,
-            text=f'Sorry! &#57608; {Constants.SERVER_ERROR}',
+            text=f'Sorry! &#128531; {Constants.SERVER_ERROR}',
             reply_markup=ReplyKeyboardRemove(),
             parse_mode=ParseMode.HTML
         )

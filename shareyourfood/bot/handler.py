@@ -13,6 +13,9 @@ class Handle:
         self.conversation.introduce(chat_id=chat_id,
                                     full_name=full_name)
 
+    def unknown_message(self, chat_id: int) -> None:
+        self.conversation.bot_did_not_understand(chat_id=chat_id)
+
     def share(self, chat_id: int, username: str, message_id: int) -> None:
         response: bool = self.repository.save_share_food_details(chat_id=chat_id,
                                                                  username=username,

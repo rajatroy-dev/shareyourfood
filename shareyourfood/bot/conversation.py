@@ -53,7 +53,7 @@ class Conversation:
 
     def no_share_found(self, chat_id: int) -> None:
         self.bot.send_message(chat_id=chat_id,
-                              text=f'Sorry! &#57608; {Constants.NO_SHARE}',
+                              text=f'Sorry! &#128531; {Constants.NO_SHARE}',
                               reply_markup=ReplyKeyboardRemove(),
                               parse_mode=ParseMode.HTML)
 
@@ -72,6 +72,12 @@ class Conversation:
 
     def reply_server_error(self, chat_id: int) -> None:
         self.bot.send_message(chat_id=chat_id,
-                              text=f'Sorry! &#57608; {Constants.SERVER_ERROR}',
+                              text=f'Sorry! &#128531; {Constants.SERVER_ERROR}',
+                              reply_markup=ReplyKeyboardRemove(),
+                              parse_mode=ParseMode.HTML)
+
+    def bot_did_not_understand(self, chat_id: int) -> None:
+        self.bot.send_message(chat_id=chat_id,
+                              text=f'{Constants.COULD_NOT_UNDERSTAND}',
                               reply_markup=ReplyKeyboardRemove(),
                               parse_mode=ParseMode.HTML)

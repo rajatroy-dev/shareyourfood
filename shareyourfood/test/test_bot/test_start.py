@@ -77,6 +77,7 @@ class Test_Start(unittest.TestCase):
         Handle.assert_called_once()
         instance = Handle.return_value
         start.chat()
+        assert instance.unknown_message.call_count == 0
         assert instance.introduction.call_count == 1
         assert instance.share.call_count == 0
         assert instance.request.call_count == 0
@@ -107,6 +108,7 @@ class Test_Start(unittest.TestCase):
         Handle.assert_called_once()
         instance = Handle.return_value
         start.chat()
+        assert instance.unknown_message.call_count == 0
         assert instance.introduction.call_count == 0
         assert instance.share.call_count == 1
         assert instance.request.call_count == 0
@@ -137,6 +139,7 @@ class Test_Start(unittest.TestCase):
         Handle.assert_called_once()
         instance = Handle.return_value
         start.chat()
+        assert instance.unknown_message.call_count == 0
         assert instance.introduction.call_count == 0
         assert instance.share.call_count == 0
         assert instance.request.call_count == 1
@@ -171,6 +174,7 @@ class Test_Start(unittest.TestCase):
         Handle.assert_called_once()
         instance = Handle.return_value
         start.chat()
+        assert instance.unknown_message.call_count == 0
         assert instance.introduction.call_count == 0
         assert instance.share.call_count == 0
         assert instance.request.call_count == 0
@@ -202,12 +206,12 @@ class Test_Start(unittest.TestCase):
         Handle.assert_called_once()
         instance = Handle.return_value
         start.chat()
-        assert instance.introduction.call_count == 1
+        assert instance.unknown_message.call_count == 1
+        assert instance.introduction.call_count == 0
         assert instance.share.call_count == 0
         assert instance.request.call_count == 0
         assert instance.location.call_count == 0
-        instance.introduction.assert_called_once_with(
-            cls.chat_id, cls.full_name)
+        instance.unknown_message.assert_called_once_with(cls.chat_id)
 
 
 if __name__ == '__main__':
