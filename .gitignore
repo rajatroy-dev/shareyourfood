@@ -136,3 +136,6 @@ __azurite_db*__.json
 
 # VSCode
 .vsCode
+
+# Terraform
+terraform.tfvars
