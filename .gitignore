@@ -139,3 +139,5 @@ __azurite_db*__.json
 
 # Terraform
 terraform.tfvars
+.terraform/
+.terraform.lock.hcl
