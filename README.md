@@ -1,12 +1,10 @@
 # WHAT IS SHAREYOURFOOD?
----
 
 ShareYourFood is a Telegram bot. You can reach out to the bot at https://t.me/ShareYourFoodBot.
 
 ---
 
 # WHY DID YOU CREATE THIS BOT?
----
 
 Every year approximately 1.3 billion tonnes of food gets lost or wasted [[Source](https://www.unep.org/thinkeatsave/get-informed/worldwide-food-waste)].
 
@@ -15,7 +13,6 @@ As such I have created this bot in an attempt to lower this large amount of food
 ---
 
 # HOW DOES IT WORK?
----
 
 If you have any food / edibles that you are going to throw out anyways, how about sharing it with others? Maybe there is someone who needs it more than you.
 
@@ -32,7 +29,6 @@ This is how it goes:
 ---
 
 # GIVE US A DEMO
----
 
 - `/share`
 
@@ -45,7 +41,6 @@ This is how it goes:
 ---
 
 # PRIVACY
----
 
 The following data will be saved in `ShareYourFoodBot`'s database. This data is saved **FOR A MAXIMUM OF 5 HOURS** (considering the fact that food items may become stale after 5 hours):
 
@@ -58,6 +53,5 @@ The following data will be saved in `ShareYourFoodBot`'s database. This data is 
 ---
 
 # LICENSE
----
 
 This is a free and open-source bot released under MIT License.
